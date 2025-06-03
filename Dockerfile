@@ -7,8 +7,8 @@ RUN apk add --no-cache tini
 # Install n8n globally
 RUN npm install -g n8n@1.94.1
 
-# Create n8n user
-RUN addgroup -g 1000 n8n && adduser -u 1000 -G n8n -s /bin/sh -D n8n
+# Create n8n user (use existing group if GID 1000 exists)
+RUN addgroup n8n || true && adduser -S -G n8n -s /bin/sh n8n
 
 # Set working directory
 WORKDIR /home/n8n
