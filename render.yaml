@@ -6,7 +6,7 @@ services:
     dockerContext: .
     plan: starter
     region: oregon
-    branch: master
+    branch: basic-deploy
     autoDeploy: false
     buildFilter:
       paths:
