@@ -1,0 +1,35 @@
+FROM node:20-alpine
+
+# Install pnpm
+RUN corepack enable && corepack prepare pnpm@latest --activate
+
+# Set working directory
+WORKDIR /app
+
+# Copy package files
+COPY package.json pnpm-workspace.yaml pnpm-lock.yaml ./
+COPY packages/*/package.json ./packages/*/
+
+# Install dependencies
+RUN pnpm install --frozen-lockfile
+
+# Copy source code
+COPY . .
+
+# Build the project
+RUN pnpm build
+
+# Expose port
+EXPOSE 5678
+
+# Set environment variables for staging (production-like but accessible)
+ENV NODE_ENV=production
+ENV N8N_HOST=0.0.0.0
+ENV N8N_PORT=5678
+ENV N8N_PROTOCOL=https
+ENV WEBHOOK_URL=https://your-app-name.onrender.com
+ENV N8N_LOG_LEVEL=info
+ENV N8N_METRICS=true
+
+# Start in production mode (more stable)
+CMD ["pnpm", "start"] 

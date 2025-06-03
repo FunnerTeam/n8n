@@ -18,3 +18,7 @@ docker/**/Dockerfile
 .vscode
 cypress
 test-workflows
+
+# Database backups
+database-backup-*.sqlite
+*.sqlite.backup*

@@ -1,5 +1,5 @@
 {
-	"name": "n8n",
+	"name": "n8n Development",
 	"dockerComposeFile": "docker-compose.yml",
 	"service": "n8n",
 	"workspaceFolder": "/workspaces",
@@ -8,12 +8,26 @@
 		"type=bind,source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,consistency=cached",
 		"type=bind,source=${localEnv:HOME}/.n8n,target=/home/node/.n8n,consistency=cached"
 	],
-	"forwardPorts": [8080, 5678],
-	"postCreateCommand": "corepack prepare --activate && pnpm install",
-	"postAttachCommand": "pnpm build",
+	"forwardPorts": [5678, 8080],
+	"postCreateCommand": "chmod +x .devcontainer/scripts/dev-setup.sh && .devcontainer/scripts/dev-setup.sh",
+	"postAttachCommand": "echo '🎯 Ready to develop! Run: pnpm dev'",
 	"customizations": {
-		"codespaces": {
-			"openFiles": ["CONTRIBUTING.md"]
+		"vscode": {
+			"extensions": [
+				"ms-vscode.vscode-typescript-next",
+				"esbenp.prettier-vscode", 
+				"ms-vscode.vscode-json",
+				"bradlc.vscode-tailwindcss",
+				"Vue.volar"
+			],
+			"settings": {
+				"typescript.preferences.importModuleSpecifier": "relative",
+				"editor.formatOnSave": true,
+				"editor.defaultFormatter": "esbenp.prettier-vscode"
+			}
 		}
+	},
+	"features": {
+		"ghcr.io/devcontainers/features/git:1": {}
 	}
 }

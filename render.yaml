@@ -1,0 +1,39 @@
+services:
+  - type: web
+    name: n8n-funner
+    env: docker
+    dockerfilePath: ./docker/images/n8n/Dockerfile
+    dockerContext: .
+    plan: starter
+    region: oregon
+    branch: master
+    autoDeploy: false
+    buildFilter:
+      paths:
+        - packages/**
+        - docker/**
+        - "*.json"
+        - "*.js"
+        - "*.ts"
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: N8N_HOST
+        sync: false
+      - key: N8N_PORT
+        value: 5678
+      - key: N8N_PROTOCOL
+        value: https
+      - key: WEBHOOK_URL
+        sync: false
+      - key: GENERIC_TIMEZONE
+        value: Asia/Jerusalem
+      - key: N8N_METRICS
+        value: true
+      - key: DB_TYPE
+        value: sqlite
+      - key: N8N_LOG_LEVEL
+        value: info
+      - key: N8N_RUNNERS_ENABLED
+        value: false
+    healthCheckPath: /healthz
