@@ -8,6 +8,9 @@ services:
     region: oregon
     branch: basic-deploy
     autoDeploy: false
+    runtime: docker
+    buildCommand: ""
+    startCommand: ""
     buildFilter:
       paths:
         - packages/**
