@@ -2,7 +2,7 @@ services:
   - type: web
     name: n8n-funner-staging
     env: docker
-    dockerfilePath: ./Dockerfile.render
+    dockerfilePath: ./Dockerfile
     dockerContext: .
     plan: starter
     region: oregon
@@ -12,7 +12,7 @@ services:
       paths:
         - packages/**
         - docker/**
-        - "Dockerfile.render"
+        - "Dockerfile"
         - "*.json"
         - "*.js"
         - "*.ts"
