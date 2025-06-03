@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: n8n-funner
+    name: n8n-funner-staging
     env: docker
     dockerfilePath: ./docker/images/n8n/Dockerfile
     dockerContext: .
@@ -17,7 +17,7 @@ services:
         - "*.ts"
     envVars:
       - key: NODE_ENV
-        value: production
+        value: development
       - key: N8N_HOST
         sync: false
       - key: N8N_PORT
@@ -29,11 +29,11 @@ services:
       - key: GENERIC_TIMEZONE
         value: Asia/Jerusalem
       - key: N8N_METRICS
-        value: true
+        value: false
       - key: DB_TYPE
         value: sqlite
       - key: N8N_LOG_LEVEL
-        value: info
+        value: debug
       - key: N8N_RUNNERS_ENABLED
         value: false
     healthCheckPath: /healthz
